@@ -204,7 +204,7 @@ nav .btn{white-space:nowrap}.mbook>div{min-width:0}.mbook{display:grid;grid-temp
 .mcls{display:grid;gap:2px;width:100%;text-align:left;font:inherit;padding:12px 14px;margin-bottom:8px;border-radius:var(--r);border:1px solid var(--line);background:var(--bg2);color:var(--ink);cursor:pointer;transition:.2s}.mcls:hover{border-color:var(--acc);transform:translateY(-2px)}.mcls b{color:var(--acc)}.mcls small{color:var(--mute);font-size:.75rem}
 .mrooms{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:24px;margin-top:34px}.mrooms article{display:flex;flex-direction:column;gap:8px;padding-bottom:6px}.mrooms .mimg{aspect-ratio:4/3}.mrooms ul{padding-left:18px;color:var(--mute);font-size:.92rem;flex:1}.mdates{display:flex;gap:8px}.mdates input{flex:1;min-width:0}
 @media(max-width:960px){.mbook{grid-template-columns:1fr}}
-/*slides-v3*/
+/*slides-v5*/
 .sl-dots,.sl-nav{display:none}
 @media (max-width:760px){
   .svc,.why,.steps,.menu,.mgrid,.mrooms,.mcls{display:flex!important;flex-wrap:nowrap!important;overflow-x:auto;scroll-snap-type:x mandatory;gap:14px!important;padding:6px 7vw 14px!important;margin-left:-6vw!important;margin-right:-6vw!important;scrollbar-width:none;-webkit-overflow-scrolling:touch;grid-template-columns:none!important}
@@ -252,6 +252,22 @@ nav .btn{white-space:nowrap}.mbook>div{min-width:0}.mbook{display:grid;grid-temp
 .sl-wiz input{font:inherit;width:100%;padding:14px 16px;border-radius:12px;border:1.5px solid var(--line);background:var(--bg2);color:var(--ink);margin-bottom:14px}
 .sl-wiz .go{display:inline-flex;align-items:center;gap:10px;font:inherit;font-weight:700;cursor:pointer;padding:14px 24px;border-radius:var(--br,999px);border:0;background:var(--acc);color:var(--on,#fff);box-shadow:0 10px 28px color-mix(in srgb,var(--acc) 40%,transparent)}
 .sl-wiz .back{background:none;border:0;color:var(--mute);cursor:pointer;font:inherit;margin-left:12px}
+.sl-call{margin-top:18px;font:inherit;cursor:pointer;background:none;border:1.5px dashed color-mix(in srgb,var(--acc) 55%,transparent);color:var(--ink);padding:12px 16px;border-radius:14px;width:100%;text-align:left;transition:all .2s}.sl-call:hover{border-style:solid;background:color-mix(in srgb,var(--acc) 8%,transparent)}.sl-call small{color:var(--mute);margin-left:6px}
+.sl-callov{position:fixed;inset:0;z-index:999;display:none;place-items:center;background:rgba(5,8,12,.82);backdrop-filter:blur(10px)}.sl-callov.on{display:grid}
+.sl-cbox{width:min(400px,92vw);text-align:center;color:#fff;padding:26px}
+.sl-ring{position:relative;width:130px;height:130px;margin:0 auto 18px;display:grid;place-items:center}
+.sl-ring b{position:relative;z-index:2;width:110px;height:110px;border-radius:50%;display:grid;place-items:center;font:700 2.2rem var(--head,inherit);background:var(--acc);color:var(--on,#fff);box-shadow:0 0 40px color-mix(in srgb,var(--acc) 60%,transparent)}
+.sl-ring i{position:absolute;inset:0;border-radius:50%;border:2px solid var(--acc);opacity:0}
+.sl-callov.on .sl-ring i{animation:slRing 2s ease-out infinite}.sl-callov.on .sl-ring i+i{animation-delay:1s}
+.sl-callov.talk .sl-ring b{animation:slTalk .5s ease-in-out infinite alternate}
+.sl-callov.listen .sl-ring b{box-shadow:0 0 0 8px rgba(255,255,255,.12),0 0 60px #4ade80}
+@keyframes slRing{from{transform:scale(.85);opacity:.9}to{transform:scale(1.6);opacity:0}}@keyframes slTalk{to{transform:scale(1.07)}}
+.sl-cbox h3{margin:0;font-size:1.4rem}.sl-st{margin:4px 0 14px;opacity:.75}
+.sl-cap{max-height:34vh;overflow:auto;text-align:left;display:flex;flex-direction:column;gap:8px;margin-bottom:14px}
+.sl-cap p{margin:0;padding:9px 12px;border-radius:14px;font-size:.95rem;max-width:88%}.sl-cap p.b{background:rgba(255,255,255,.1);align-self:flex-start}.sl-cap p.u{background:var(--acc);color:var(--on,#fff);align-self:flex-end}
+.sl-tf{display:flex;gap:8px;margin-bottom:12px}.sl-tf input{flex:1;padding:12px;border-radius:12px;border:0}.sl-tf button{border:0;border-radius:12px;padding:0 16px;background:var(--acc);color:var(--on,#fff)}
+.sl-cbtn{display:flex;gap:10px;justify-content:center;margin-bottom:12px}.sl-cbtn button{font:inherit;font-weight:700;border:0;border-radius:999px;padding:13px 22px;cursor:pointer}.sl-hang{background:#ef4444;color:#fff}.sl-mic{background:#fff;color:#111}
+.sl-cbox small{opacity:.6;font-size:.75rem}
 .sl-wiz .sum{margin:0 0 16px;color:var(--mute);font-size:.95rem}
 
 </style>
@@ -382,7 +398,7 @@ const answer=(q)=>{const w=nrm(q).split(/[^a-z0-9]+/).filter((x)=>x.length>3);
  let best=null,score=0;for(const f of KB.faq){const s=w.filter((x)=>nrm(f.q+' '+f.a).includes(x)).length;if(s>score){score=s;best=f}}
  if(best&&score)return best.a;
  return 'Te lo confirmamos enseguida: '+(KB.wa?'<a href="'+KB.wa+'" target="_blank" rel="noopener">escríbenos por WhatsApp</a>':'déjanos tu mensaje en el formulario de contacto')+' y te respondemos.'};
-document.getElementById('botb').onclick=()=>{bw.classList.toggle('on');if(!greeted){greeted=true;say('¡Hola! 👋 Soy el asistente de <b>'+KB.name+'</b>. Pregúntame lo que necesites: horarios, servicios, precios o cómo pedir cita.');bc.innerHTML=KB.faq.slice(0,3).map((f,i)=>'<button data-i="'+i+'">'+f.q+'</button>').join('')+'<button data-h>Horario</button>';bc.querySelectorAll('button').forEach((b)=>b.onclick=()=>{const q=b.dataset.h!=null?'¿Qué horario tenéis?':KB.faq[b.dataset.i].q;say(q,'u');setTimeout(()=>say(answer(q)),450)})}};
+window.__bot={answer:(q)=>answer(q),KB};document.getElementById('botb').onclick=()=>{bw.classList.toggle('on');if(!greeted){greeted=true;say('¡Hola! 👋 Soy el asistente de <b>'+KB.name+'</b>. Pregúntame lo que necesites: horarios, servicios, precios o cómo pedir cita.');bc.innerHTML=KB.faq.slice(0,3).map((f,i)=>'<button data-i="'+i+'">'+f.q+'</button>').join('')+'<button data-h>Horario</button>';bc.querySelectorAll('button').forEach((b)=>b.onclick=()=>{const q=b.dataset.h!=null?'¿Qué horario tenéis?':KB.faq[b.dataset.i].q;say(q,'u');setTimeout(()=>say(answer(q)),450)})}};
 document.getElementById('botx').onclick=()=>bw.classList.remove('on');
 document.getElementById('botf').onsubmit=(e)=>{e.preventDefault();const i=document.getElementById('boti'),q=i.value.trim();if(!q)return;say(q.replace(/</g,'&lt;'),'u');i.value='';setTimeout(()=>say(answer(q)),500)};
 const MOD={"wa":"34633561482","name":"Talleres Easytronic","hours":["lunes: 9:00–14:00, 16:00–19:00","martes: 9:00–14:00, 16:00–19:00","miércoles: 9:00–14:00, 16:00–19:00","jueves: 9:00–14:00, 16:00–19:00","viernes: 8:00–16:00","sábado: Cerrado","domingo: Cerrado"],"services":[]};
@@ -420,7 +436,7 @@ document.querySelectorAll('[data-room]').forEach((b)=>b.onclick=()=>{const [i,o]
 const lb=document.getElementById('lb');document.querySelectorAll('.gal a').forEach((a)=>a.addEventListener('click',(e)=>{e.preventDefault();lb.querySelector('img').src=a.getAttribute('href');lb.classList.add('on')}));lb.onclick=()=>lb.classList.remove('on');
 })();
 </script>
-<script>/*slides-v3*/(function(){
+<script>/*slides-v5*/(function(){
 var mob=matchMedia('(max-width:760px)');
 // puntos bajo cada carrusel (móvil)
 document.querySelectorAll('.svc,.why,.steps,.menu,.gal,.mgrid,.mrooms,.mcls').forEach(function(t){
@@ -446,7 +462,7 @@ var steps=[{q:food?'¿Qué te apetece?':stay?'¿Qué buscas?':'¿Qué necesitas?
   food?{q:'¿Cuántos sois?',o:['1-2','3-4','5-8','Más de 8']}:{q:'¿Para cuándo?',o:['Lo antes posible','Esta semana','Este mes','Solo quiero información']},
   food?{q:'¿Cuándo venís?',o:['Hoy','Mañana','Este fin de semana','Otro día']}:null].filter(Boolean);
 var ans=[],sec=document.createElement('section');sec.className='sl-wiz';sec.id='asistente';
-sec.innerHTML='<div class="wrap"><div class="box"><div class="eyebrow">En 3 toques</div><h2>'+(food?'Tu mesa, sin llamar':'Te respondemos hoy')+'</h2><div class="bar"><i></i></div><div class="st"></div></div></div>';
+sec.innerHTML='<div class="wrap"><div class="box"><div class="eyebrow">En 3 toques</div><h2>'+(food?'Tu mesa, sin llamar':'Te respondemos hoy')+'</h2><div class="bar"><i></i></div><div class="st"></div>'+(window.__bot?'<button class="sl-call" type="button">📞 ¿Prefieres hablar? Llama a la recepcionista <small>demo de voz</small></button>':'')+'</div></div>';
 var hero=document.querySelector('header.hero');(hero?hero:document.querySelector('section')).after(sec);
 var box=sec.querySelector('.st'),bar=sec.querySelector('.bar i');
 function draw(){var k=ans.length;bar.style.width=(k/(steps.length+1)*100)+'%';
@@ -457,6 +473,36 @@ function draw(){var k=ans.length;bar.style.width=(k/(steps.length+1)*100)+'%';
   box.querySelector('.go').onclick=function(){var n=box.querySelector('#slname').value.trim();var msg='Hola '+biz+(n?', soy '+n:'')+'. '+(food?'Querría: '+ans[0]+(ans[1]?', somos '+ans[1]:'')+(ans[2]?', '+ans[2].toLowerCase():''):'Me interesa: '+ans[0]+(ans[1]?' ('+ans[1].toLowerCase()+')':''))+'. ¡Gracias!';
     if(wa)window.open(wa+'?text='+encodeURIComponent(msg),'_blank');else location.href=tel.getAttribute('href')}}
 draw();
+// 📞 recepcionista de voz (demo, sin servidor): habla y escucha con el propio navegador y contesta con los datos del negocio
+var cb=sec.querySelector('.sl-call');if(cb&&window.__bot){
+  var SR=window.SpeechRecognition||window.webkitSpeechRecognition,K=window.__bot.KB;
+  var ov=document.createElement('div');ov.className='sl-callov';ov.innerHTML='<div class="sl-cbox"><div class="sl-ring"><i></i><i></i><b>'+(K.name||biz).split(' ').map(function(w){return w[0]}).slice(0,2).join('')+'</b></div><h3>'+(K.name||biz)+'</h3><p class="sl-st">Llamando…</p><div class="sl-cap"></div><form class="sl-tf" hidden><input placeholder="Escribe tu pregunta…"><button>➤</button></form><div class="sl-cbtn"><button type="button" class="sl-mic" hidden>🎤 Hablar</button><button type="button" class="sl-hang">Colgar</button></div><small>Recepcionista virtual · demostración. En el servicio real contesta tu teléfono 24 h.</small></div>';
+  document.body.appendChild(ov);
+  var st=ov.querySelector('.sl-st'),cap=ov.querySelector('.sl-cap'),mic=ov.querySelector('.sl-mic'),tf=ov.querySelector('.sl-tf'),rec=null,live=false;
+  var DAYS=['lunes','martes','miércoles','jueves','viernes','sábado','domingo'];
+  // horario dicho como una persona: días seguidos con el mismo horario juntos, «de 13 a 19»
+  var hoursTalk=function(t){var m=[],re=/(lunes|martes|miércoles|jueves|viernes|sábado|domingo):\s*([^.;]+?)(?=\s*(?:lunes|martes|miércoles|jueves|viernes|sábado|domingo):|[.;]|$)/gi,x;while((x=re.exec(t)))m.push([x[1].toLowerCase(),x[2].trim()]);if(m.length<3)return t;
+    var g=[];m.forEach(function(d){var l=g[g.length-1];if(l&&l.v===d[1]&&DAYS.indexOf(d[0])===DAYS.indexOf(l.b)+1)l.b=d[0];else g.push({a:d[0],b:d[0],v:d[1]})});
+    var say=function(v){return /cerrad/i.test(v)?'cerrado':v.replace(/(\d{1,2}):00/g,'$1').replace(/(\d{1,2}):(\d{2})/g,'$1 y $2').replace(/\s*[–-]\s*/g,' a ').replace(/,\s*/g,' y de ').replace(/^/,'de ')};
+    return 'Nuestro horario: '+g.map(function(x){return (x.a===x.b?x.a:DAYS.indexOf(x.b)===DAYS.indexOf(x.a)+1?x.a+' y '+x.b:'de '+x.a+' a '+x.b)+', '+say(x.v)}).join('; ')+'.'};
+  var plain=function(h){var d=document.createElement('div');d.innerHTML=String(h).replace(/<br\s*\/?>|<\/(li|p|div)>/gi,'. ');d.querySelectorAll('a').forEach(function(a){a.replaceWith(a.textContent)});return hoursTalk(d.textContent).replace(/[🌀-🫿☀-➿]/gu,'').replace(/\s+/g,' ').trim()};
+  var line=function(t,who){var p=document.createElement('p');p.className=who;p.textContent=t;cap.appendChild(p);cap.scrollTop=cap.scrollHeight};
+  var voice=function(){var v=speechSynthesis.getVoices();return v.find(function(x){return /es-ES/i.test(x.lang)&&/female|mujer|helena|elvira|laura|monica|lucia/i.test(x.name)})||v.find(function(x){return /^es/i.test(x.lang)})};
+  var speak=function(t,then){if(!live)return;line(t,'b');ov.classList.add('talk');st.textContent='Hablando…';var u=new SpeechSynthesisUtterance(t);u.lang='es-ES';var v=voice();if(v)u.voice=v;u.rate=1.04;u.onend=function(){ov.classList.remove('talk');if(then)then()};speechSynthesis.cancel();speechSynthesis.speak(u)};
+  var listen=function(){if(!live)return;if(!SR){st.textContent='Escribe tu pregunta';tf.hidden=false;tf.querySelector('input').focus();return}
+    rec=new SR();rec.lang='es-ES';rec.interimResults=false;rec.maxAlternatives=1;st.textContent='Te escucho…';ov.classList.add('listen');
+    rec.onresult=function(e){var q=e.results[0][0].transcript;ov.classList.remove('listen');line(q,'u');reply(q)};
+    rec.onerror=function(){ov.classList.remove('listen');st.textContent='No te he oído';mic.hidden=false};
+    rec.onend=function(){ov.classList.remove('listen')};try{rec.start()}catch(e){mic.hidden=false}};
+  var reply=function(q){if(/adios|adiós|gracias,? (eso es todo|nada más)|colgar|hasta luego/i.test(q)){speak('¡Gracias por llamar a '+(K.name||biz)+'! Que tengas un buen día.',hang);return}
+    var a=plain(window.__bot.answer(q));speak(a+' ¿Te puedo ayudar en algo más?',listen)};
+  var hang=function(){live=false;try{rec&&rec.abort()}catch(e){}speechSynthesis.cancel();ov.classList.remove('on','talk','listen')};
+  mic.onclick=function(){mic.hidden=true;listen()};
+  tf.onsubmit=function(e){e.preventDefault();var i=tf.querySelector('input'),q=i.value.trim();if(!q)return;i.value='';line(q,'u');reply(q)};
+  ov.querySelector('.sl-hang').onclick=hang;
+  cb.onclick=function(){cap.innerHTML='';tf.hidden=true;mic.hidden=true;live=true;ov.classList.add('on');st.textContent='Llamando…';
+    setTimeout(function(){speak('Hola, has llamado a '+(K.name||biz)+'. Soy su recepcionista virtual. Puedo decirte el horario, los servicios, dónde estamos o ayudarte a reservar. ¿En qué te ayudo?',listen)},1300)};
+}
 })();</script>
 </body>
 </html>
