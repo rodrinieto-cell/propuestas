@@ -204,6 +204,56 @@ nav .btn{white-space:nowrap}.mbook>div{min-width:0}.mbook{display:grid;grid-temp
 .mcls{display:grid;gap:2px;width:100%;text-align:left;font:inherit;padding:12px 14px;margin-bottom:8px;border-radius:var(--r);border:1px solid var(--line);background:var(--bg2);color:var(--ink);cursor:pointer;transition:.2s}.mcls:hover{border-color:var(--acc);transform:translateY(-2px)}.mcls b{color:var(--acc)}.mcls small{color:var(--mute);font-size:.75rem}
 .mrooms{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:24px;margin-top:34px}.mrooms article{display:flex;flex-direction:column;gap:8px;padding-bottom:6px}.mrooms .mimg{aspect-ratio:4/3}.mrooms ul{padding-left:18px;color:var(--mute);font-size:.92rem;flex:1}.mdates{display:flex;gap:8px}.mdates input{flex:1;min-width:0}
 @media(max-width:960px){.mbook{grid-template-columns:1fr}}
+/*slides-v3*/
+.sl-dots,.sl-nav{display:none}
+@media (max-width:760px){
+  .svc,.why,.steps,.menu,.mgrid,.mrooms,.mcls{display:flex!important;flex-wrap:nowrap!important;overflow-x:auto;scroll-snap-type:x mandatory;gap:14px!important;padding:6px 7vw 14px!important;margin-left:-6vw!important;margin-right:-6vw!important;scrollbar-width:none;-webkit-overflow-scrolling:touch;grid-template-columns:none!important}
+  .svc::-webkit-scrollbar,.why::-webkit-scrollbar,.steps::-webkit-scrollbar,.menu::-webkit-scrollbar,.gal::-webkit-scrollbar,.mgrid::-webkit-scrollbar{display:none}
+  .svc>*,.why>*,.steps>*,.menu>*,.mgrid>*,.mrooms>*,.mcls>*{flex:0 0 84%!important;max-width:84%!important;scroll-snap-align:center;margin:0!important}
+  .gal{columns:auto!important;display:flex!important;overflow-x:auto;scroll-snap-type:x mandatory;gap:10px;padding:6px 7vw 14px;margin-left:-6vw;margin-right:-6vw;scrollbar-width:none}
+  .gal>a{flex:0 0 80%;scroll-snap-align:center;margin:0!important}.gal img{width:100%;height:58vw;max-height:340px;object-fit:cover}
+  .sl-dots{display:flex;justify-content:center;gap:6px;margin-top:6px}
+  .sl-dots i{width:7px;height:7px;border-radius:9px;background:color-mix(in srgb,var(--ink) 22%,transparent);transition:all .3s}
+  .sl-dots i.on{width:24px;background:var(--acc)}
+  .sl-swipe{display:block;text-align:center;font-size:.75rem;letter-spacing:.12em;text-transform:uppercase;color:var(--mute);margin-top:8px;animation:slSwipe 2.4s ease-in-out infinite}
+  @keyframes slSwipe{0%,100%{transform:translateX(0);opacity:.55}50%{transform:translateX(-10px);opacity:1}}
+  section{scroll-margin-top:70px;padding-top:52px!important;padding-bottom:52px!important}
+  header.hero .media,header.hero .mwrap{max-height:300px!important}header.hero .media img{height:300px!important;object-fit:cover}
+  #nosotros .stack{display:grid!important;grid-template-columns:1.25fr 1fr;gap:10px;height:auto!important;min-height:0!important}
+  #nosotros .stack>*{position:relative!important;inset:auto!important;width:100%!important;height:210px!important;transform:none!important;margin:0!important}
+  #nosotros .stack img{width:100%;height:100%;object-fit:cover}
+  #contacto .map,#contacto iframe{height:200px!important;min-height:0!important}
+  footer .cols{display:grid!important;grid-template-columns:1fr 1fr;gap:18px}footer .cols>div:first-child{grid-column:1/-1}
+  .big-cta{padding-top:60px!important;padding-bottom:60px!important}
+}
+@media (min-width:761px){
+  html{scroll-snap-type:y proximity}
+  header.hero,section,.big-cta{scroll-snap-align:start}
+  .sl-nav{position:fixed!important;right:22px!important;left:auto!important;width:auto!important;height:auto!important;background:none!important;padding:0!important;border:0!important;top:50%;transform:translateY(-50%);display:flex!important;flex-direction:column;gap:14px;z-index:70}
+  .sl-nav a{width:11px;height:11px;border-radius:50%;border:1.5px solid var(--acc);display:block;position:relative;transition:transform .25s,background .25s;background:transparent}
+  .sl-nav a.on{background:var(--acc);transform:scale(1.35)}
+  .sl-nav a span{position:absolute;right:22px;top:50%;transform:translate(6px,-50%);white-space:nowrap;background:var(--bg2);color:var(--ink);border:1px solid var(--line);padding:5px 11px;border-radius:9px;font-size:12px;opacity:0;pointer-events:none;transition:all .2s;box-shadow:0 8px 24px rgba(0,0,0,.18)}
+  .sl-nav a:hover span,.sl-nav a.on span{opacity:1;transform:translate(0,-50%)}
+  .sl-nav a:not(:hover):not(.on) span{opacity:0}
+}
+.sl-wiz{padding:clamp(48px,7vw,90px) 0;background:var(--bg2)}
+.sl-wiz .box{max-width:760px;margin:0 auto;background:var(--bg);border:1px solid var(--line);border-radius:calc(var(--r, 18px) + 6px);padding:clamp(22px,4vw,40px);box-shadow:0 24px 60px rgba(0,0,0,.12);position:relative;overflow:hidden}
+.sl-wiz .box::before{content:'';position:absolute;inset:-40% -10% auto auto;width:60%;aspect-ratio:1;border-radius:50%;background:radial-gradient(circle,color-mix(in srgb,var(--acc) 22%,transparent),transparent 70%);pointer-events:none}
+.sl-wiz .eyebrow{margin-bottom:6px}
+.sl-wiz h2{margin:0 0 6px;font-size:clamp(1.6rem,3.6vw,2.4rem)!important}
+.sl-wiz .bar{height:4px;border-radius:9px;background:var(--line);margin:18px 0 22px;overflow:hidden}.sl-wiz .bar i{display:block;height:100%;width:0;background:var(--acc);transition:width .45s cubic-bezier(.2,.8,.2,1)}
+.sl-wiz .q{font-weight:600;font-size:1.1rem;margin:0 0 14px}
+.sl-wiz .opts{display:flex;flex-wrap:wrap;gap:10px}
+.sl-wiz .opts button{font:inherit;cursor:pointer;padding:12px 18px;border-radius:var(--br,999px);border:1.5px solid var(--line);background:var(--bg2);color:var(--ink);transition:all .2s}
+.sl-wiz .opts button:hover{border-color:var(--acc);transform:translateY(-2px)}
+.sl-wiz .opts button.sel{background:var(--acc);border-color:var(--acc);color:var(--on,#fff)}
+.sl-wiz .step{animation:slIn .45s cubic-bezier(.2,.8,.2,1)}
+@keyframes slIn{from{opacity:0;transform:translateX(24px)}}
+.sl-wiz input{font:inherit;width:100%;padding:14px 16px;border-radius:12px;border:1.5px solid var(--line);background:var(--bg2);color:var(--ink);margin-bottom:14px}
+.sl-wiz .go{display:inline-flex;align-items:center;gap:10px;font:inherit;font-weight:700;cursor:pointer;padding:14px 24px;border-radius:var(--br,999px);border:0;background:var(--acc);color:var(--on,#fff);box-shadow:0 10px 28px color-mix(in srgb,var(--acc) 40%,transparent)}
+.sl-wiz .back{background:none;border:0;color:var(--mute);cursor:pointer;font:inherit;margin-left:12px}
+.sl-wiz .sum{margin:0 0 16px;color:var(--mute);font-size:.95rem}
+
 </style>
 
 <meta name="robots" content="noindex,nofollow,noarchive">
@@ -362,5 +412,43 @@ document.querySelectorAll('[data-room]').forEach((b)=>b.onclick=()=>{const [i,o]
 const lb=document.getElementById('lb');document.querySelectorAll('.gal a').forEach((a)=>a.addEventListener('click',(e)=>{e.preventDefault();lb.querySelector('img').src=a.getAttribute('href');lb.classList.add('on')}));lb.onclick=()=>lb.classList.remove('on');
 })();
 </script>
+<script>/*slides-v3*/(function(){
+var mob=matchMedia('(max-width:760px)');
+// puntos bajo cada carrusel (móvil)
+document.querySelectorAll('.svc,.why,.steps,.menu,.gal,.mgrid,.mrooms,.mcls').forEach(function(t){
+  var n=t.children.length;if(n<2)return;var d=document.createElement('div');d.className='sl-dots';for(var i=0;i<n;i++)d.appendChild(document.createElement('i'));
+  var h=document.createElement('span');h.className='sl-swipe';h.textContent='Desliza →';t.after(d);d.after(h);
+  var upd=function(){var w=t.children[0].getBoundingClientRect().width+14,k=Math.round(t.scrollLeft/w);d.querySelectorAll('i').forEach(function(x,j){x.classList.toggle('on',j===k)});if(t.scrollLeft>20)h.style.display='none'};
+  t.addEventListener('scroll',upd,{passive:true});upd();
+});
+// puntos laterales con el nombre de cada sección (ordenador) + teclado
+var secs=[].slice.call(document.querySelectorAll('header.hero,section[id],.big-cta')).filter(function(s){return s.offsetHeight>200});
+var name=function(s){if(s.matches('header.hero'))return'Inicio';if(s.matches('.big-cta'))return'Contacto';var e=s.querySelector('.eyebrow');return e?e.textContent.trim():(s.id||'').replace(/-/g,' ')};
+if(secs.length>3){var nav=document.createElement('div');nav.className='sl-nav';secs.forEach(function(s,i){var a=document.createElement('a');a.href='#';a.innerHTML='<span>'+name(s)+'</span>';a.onclick=function(e){e.preventDefault();s.scrollIntoView({behavior:'smooth'})};nav.appendChild(a)});document.body.appendChild(nav);
+  var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){var i=secs.indexOf(e.target);nav.querySelectorAll('a').forEach(function(a,j){a.classList.toggle('on',j===i)})}})},{rootMargin:'-45% 0px -50% 0px'});secs.forEach(function(s){io.observe(s)});
+  addEventListener('keydown',function(e){if(mob.matches||/input|textarea|select/i.test((document.activeElement||{}).tagName||''))return;var cur=secs.findIndex(function(s){return s.getBoundingClientRect().top>=-40});if(cur<0)cur=secs.length-1;var t=null;
+    if(e.key==='ArrowDown'||e.key==='PageDown'){var nx=secs.find(function(s){return s.getBoundingClientRect().top>60});t=nx}else if(e.key==='ArrowUp'||e.key==='PageUp'){var pv=secs.filter(function(s){return s.getBoundingClientRect().top<-60}).pop();t=pv}
+    if(t){e.preventDefault();t.scrollIntoView({behavior:'smooth'})}});}
+// asistente de 3 toques → WhatsApp escrito
+var fab=document.querySelector('a.fab[href*="wa.me"]'),tel=document.querySelector('a[href^="tel:"]');if(!fab&&!tel)return;
+var wa=fab?fab.getAttribute('href').split('?')[0]:null,biz=(document.querySelector('.logo span')||{}).textContent||document.title.split('·')[0].trim();
+var items=[].slice.call(document.querySelectorAll('.svc h3,.menu h3')).map(function(h){return h.textContent.trim()}).filter(Boolean).slice(0,6);
+var food=!!document.querySelector('#carta,#reservar'),stay=!!document.querySelector('.mrooms');
+var steps=[{q:food?'¿Qué te apetece?':stay?'¿Qué buscas?':'¿Qué necesitas?',o:(food?['Reservar mesa','Pedir para llevar','Celebración o grupo','Ver la carta']:items.length?items:['Información','Pedir presupuesto','Pedir cita']).concat(['Otra cosa'])},
+  food?{q:'¿Cuántos sois?',o:['1-2','3-4','5-8','Más de 8']}:{q:'¿Para cuándo?',o:['Lo antes posible','Esta semana','Este mes','Solo quiero información']},
+  food?{q:'¿Cuándo venís?',o:['Hoy','Mañana','Este fin de semana','Otro día']}:null].filter(Boolean);
+var ans=[],sec=document.createElement('section');sec.className='sl-wiz';sec.id='asistente';
+sec.innerHTML='<div class="wrap"><div class="box"><div class="eyebrow">En 3 toques</div><h2>'+(food?'Tu mesa, sin llamar':'Te respondemos hoy')+'</h2><div class="bar"><i></i></div><div class="st"></div></div></div>';
+var hero=document.querySelector('header.hero');(hero?hero:document.querySelector('section')).after(sec);
+var box=sec.querySelector('.st'),bar=sec.querySelector('.bar i');
+function draw(){var k=ans.length;bar.style.width=(k/(steps.length+1)*100)+'%';
+  if(k<steps.length){var s=steps[k];box.innerHTML='<div class="step"><p class="q">'+s.q+'</p><div class="opts">'+s.o.map(function(o){return '<button type="button">'+o+'</button>'}).join('')+'</div>'+(k?'<button class="back" type="button">← Atrás</button>':'')+'</div>';
+    box.querySelectorAll('.opts button').forEach(function(b){b.onclick=function(){b.classList.add('sel');setTimeout(function(){ans.push(b.textContent);draw()},220)}});var bk=box.querySelector('.back');if(bk)bk.onclick=function(){ans.pop();draw()};return}
+  box.innerHTML='<div class="step"><p class="sum">'+ans.join(' · ')+'</p><p class="q">¿Cómo te llamas?</p><input id="slname" placeholder="Tu nombre" autocomplete="given-name"><button class="go" type="button">'+(wa?'Enviar por WhatsApp':'Llamar ahora')+' →</button><button class="back" type="button">← Atrás</button></div>';
+  bar.style.width='100%';box.querySelector('.back').onclick=function(){ans.pop();draw()};
+  box.querySelector('.go').onclick=function(){var n=box.querySelector('#slname').value.trim();var msg='Hola '+biz+(n?', soy '+n:'')+'. '+(food?'Querría: '+ans[0]+(ans[1]?', somos '+ans[1]:'')+(ans[2]?', '+ans[2].toLowerCase():''):'Me interesa: '+ans[0]+(ans[1]?' ('+ans[1].toLowerCase()+')':''))+'. ¡Gracias!';
+    if(wa)window.open(wa+'?text='+encodeURIComponent(msg),'_blank');else location.href=tel.getAttribute('href')}}
+draw();
+})();</script>
 </body>
 </html>
