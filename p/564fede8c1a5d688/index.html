@@ -1,0 +1,22 @@
+<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow,noarchive"><meta name="referrer" content="no-referrer">
+<title>Propuesta de diseño web</title>
+<meta property="og:title" content="Tu propuesta de web está lista">
+<meta property="og:description" content="Diseño hecho a medida para tu negocio, con tus fotos y tus opiniones de Google. Enlace privado.">
+<meta property="og:image" content="https://rodrinieto-cell.github.io/propuestas/preview.png"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta name="twitter:card" content="summary_large_image">
+<style>html,body{margin:0;height:100%;background:#0f1115;color:#e8e8ea;font:16px/1.5 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}#m{position:fixed;inset:0;display:grid;place-items:center;text-align:center;padding:24px}#m b{display:block;font-size:1.1rem;margin-top:16px;max-width:30ch}#m small{display:block;opacity:.55;margin-top:6px}.sp{width:38px;height:38px;border-radius:50%;border:3px solid rgba(255,255,255,.15);border-top-color:#fff;margin:0 auto;animation:r 1s linear infinite}@keyframes r{to{transform:rotate(360deg)}}</style></head>
+<body><div id="m"><div><div class="sp"></div><b>Abriendo tu propuesta…</b><small>Enlace privado · Rodrigo</small></div></div>
+<script>(async function(){var m=document.getElementById('m'),K='k:'+location.pathname;
+function fail(t){m.innerHTML='<div><b>'+t+'</b></div>'}
+try{var k=location.hash.slice(1);try{if(k)sessionStorage.setItem(K,k);else k=sessionStorage.getItem(K)||''}catch(e){}
+if(!k)return fail('A este enlace le falta su parte final. Ábrelo desde el mensaje original o pide que te lo reenvíen.');
+if(!(window.crypto&&crypto.subtle&&window.TextDecoder))return fail('Tu navegador es demasiado antiguo para abrir esta propuesta. Prueba con Chrome o Safari actualizados.');
+var raw=Uint8Array.from(atob(k.replace(/-/g,'+').replace(/_/g,'/')),function(c){return c.charCodeAt(0)});
+var key=await crypto.subtle.importKey('raw',raw,'AES-GCM',false,['decrypt']);
+var r=await fetch('d.bin',{cache:'no-cache'});if(!r.ok)return fail('Esta propuesta ya no está disponible.');
+var b=new Uint8Array(await r.arrayBuffer());
+var p=new Uint8Array(await crypto.subtle.decrypt({name:'AES-GCM',iv:b.subarray(0,12)},key,b.subarray(12)));
+var n=new DataView(p.buffer).getUint32(0,true),meta=JSON.parse(new TextDecoder().decode(p.subarray(4,4+n))),base=4+n,h=meta.h;
+meta.i.forEach(function(x){h=h.split('@@IMG:'+x.n+'@@').join(URL.createObjectURL(new Blob([p.subarray(base+x.o,base+x.o+x.l)],{type:'image/jpeg'})))});
+document.open();document.write(h);document.close();
+}catch(e){fail('No se ha podido abrir la propuesta: el enlace no está completo o ya no es válido.')}})();</script></body></html>
